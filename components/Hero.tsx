@@ -31,10 +31,10 @@ function Hero() {
       </Box>
       <Box maxW="550px" mx="2">
         <Heading fontSize="5xl">Hi there!</Heading>
-        <Text my="4">
+        <Text my="4" fontSize="lg">
           My name is Diego Camy. Welcome to my website. I'm a self-taught web
-          developer from Rivera, Uruguay. To see my work, which has been viewed
-          over{" "}
+          developer from Rivera, Uruguay. To see my projects, which have been
+          viewed over{" "}
           <Text as="span" fontWeight="bold" textDecor="underline">
             {number}
           </Text>{" "}

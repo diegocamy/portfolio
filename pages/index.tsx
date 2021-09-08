@@ -1,6 +1,8 @@
 import { Container } from "@chakra-ui/layout";
 import Head from "next/head";
+import React from "react";
 import Hero from "../components/Hero";
+import Technologies from "../components/Technologies";
 
 export default function Home() {
   return (
@@ -11,6 +13,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero />
+      <Technologies />
     </Container>
   );
 }
