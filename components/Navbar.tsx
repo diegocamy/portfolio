@@ -9,10 +9,18 @@ function Navbar() {
       m="auto"
       as="header"
       justify="center"
-      borderBottom="1px solid #f8f8f8"
+      borderBottom={
+        colorMode === "light" ? "1px solid #f8f8f8" : "1px solid #283b64"
+      }
     >
       <Flex maxW="1200px" w="100%" py="2" justify="center">
-        <Heading fontSize="lg" fontWeight="extrabold" flexGrow={1} m="auto">
+        <Heading
+          fontSize="lg"
+          fontWeight="extrabold"
+          flexGrow={1}
+          m="auto"
+          mx="4"
+        >
           <Link href="/">Diego Camy</Link>
         </Heading>
         <Flex mr="2" align="center">

@@ -23,7 +23,7 @@ function Technologies() {
       direction="column"
       justify="center"
       align="center"
-      my="5"
+      my="20"
     >
       <Heading as="h3" size="lg">
         Here are some of the technologies I like to work with

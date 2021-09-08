@@ -2,6 +2,7 @@ import { Container } from "@chakra-ui/layout";
 import Head from "next/head";
 import React from "react";
 import Hero from "../components/Hero";
+import Projects from "../components/Projects";
 import Technologies from "../components/Technologies";
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
       </Head>
       <Hero />
       <Technologies />
+      <Projects />
     </Container>
   );
 }
