@@ -1,8 +1,19 @@
 import { Flex, Icon, Switch, useColorMode } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 function ThemeSwitch() {
   const { colorMode, toggleColorMode } = useColorMode();
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const color = localStorage.getItem("chakra-ui-color-mode");
+
+    if (color === "light") return setIsDark(false);
+
+    return setIsDark(true);
+  }, []);
+
   return (
     <Flex
       align="center"
@@ -19,7 +30,14 @@ function ThemeSwitch() {
       boxShadow="dark-lg"
     >
       <Icon as={FaSun} h="5" w="5" />
-      <Switch onChange={toggleColorMode} mx="2" />
+      <Switch
+        onChange={() => {
+          toggleColorMode();
+          setIsDark(!isDark);
+        }}
+        isChecked={isDark}
+        mx="2"
+      />
       <Icon as={FaMoon} h="5" w="5" />
     </Flex>
   );

@@ -1,4 +1,11 @@
-import { Box, Flex, Text, Heading, useMediaQuery } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Heading,
+  useMediaQuery,
+  ResponsiveValue,
+} from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -7,16 +14,25 @@ import me from "../public/me.png";
 function Hero() {
   const [isMobile] = useMediaQuery("(max-width: 786px)");
   const [number, setNumber] = useState(undefined);
+  const [direction, setDirection] =
+    useState<ResponsiveValue<"row" | "column">>("row");
 
   useEffect(() => {
     setNumber(Math.ceil(Math.random() * 10000));
   }, []);
+
+  useEffect(() => {
+    if (isMobile) return setDirection("column");
+
+    return setDirection("row");
+  }, [isMobile]);
+
   return (
     <Flex
       as="section"
       mx="auto"
       my="20"
-      direction={isMobile ? "column" : "row"}
+      direction={direction}
       justify="center"
       align="center"
     >
