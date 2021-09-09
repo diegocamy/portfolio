@@ -38,6 +38,7 @@ function Hero() {
     >
       <Box mx="2">
         <Image
+          alt="my picture"
           src={me}
           width="270px"
           height="350px"
@@ -48,9 +49,9 @@ function Hero() {
       <Box maxW="550px" mx="2">
         <Heading fontSize="5xl">Hi there!</Heading>
         <Text my="4" fontSize="lg">
-          My name is Diego Camy. Welcome to my website. I'm a self-taught web
-          developer from Rivera, Uruguay. To see my projects, which have been
-          viewed over{" "}
+          My name is Diego Camy. Welcome to my website. I&apos;m a self-taught
+          web developer from Rivera, Uruguay. To see my projects, which have
+          been viewed over{" "}
           <Text as="span" fontWeight="bold" textDecor="underline">
             {number}
           </Text>{" "}
