@@ -10,6 +10,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import useButtonColor from "../hooks/useButtonColor";
 
 interface Props {
   inverted?: boolean;
@@ -18,35 +19,10 @@ interface Props {
 function Project({ inverted }: Props) {
   const [isMobile] = useMediaQuery("(max-width: 786px)");
   const { colorMode } = useColorMode();
+  const { buttonColor, buttonTextColor, setHovering } =
+    useButtonColor(colorMode);
   const [direction, setDirection] =
     useState<ResponsiveValue<"row" | "column-reverse" | "row-reverse">>("row");
-  const [hovering, setHovering] = useState(false);
-  const [buttonColor, setButtonColor] = useState("black");
-  const [buttonTextColor, setButtonTextColor] = useState("black");
-
-  useEffect(() => {
-    if (colorMode === "light" && hovering) {
-      setButtonTextColor("black");
-      setButtonColor("gray.300");
-      return;
-    }
-
-    if (colorMode === "dark" && hovering) {
-      setButtonColor("teal.800");
-      setButtonTextColor("white");
-      return;
-    }
-
-    if (colorMode === "dark") {
-      setButtonColor("teal.300");
-      setButtonTextColor("black");
-    }
-
-    if (colorMode === "light") {
-      setButtonColor("black");
-      setButtonTextColor("white");
-    }
-  }, [colorMode, hovering]);
 
   useEffect(() => {
     if (isMobile) return setDirection("column-reverse");
