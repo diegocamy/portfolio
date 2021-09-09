@@ -8,10 +8,12 @@ import {
   Image,
   Button,
   useColorMode,
+  useDisclosure,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import useButtonColor from "../hooks/useButtonColor";
 import useHovering from "../hooks/useHovering";
+import ProjectDrawer from "./ProjectDrawer";
 
 interface Props {
   inverted?: boolean;
@@ -19,6 +21,7 @@ interface Props {
 
 function Project({ inverted }: Props) {
   const [isMobile] = useMediaQuery("(max-width: 786px)");
+  const { onOpen, isOpen, onClose } = useDisclosure();
   const { colorMode } = useColorMode();
   const { hovering, setHovering } = useHovering();
   const { buttonColor, buttonTextColor } = useButtonColor(colorMode, hovering);
@@ -44,7 +47,9 @@ function Project({ inverted }: Props) {
       cursor="pointer"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
+      onClick={onOpen}
     >
+      <ProjectDrawer isOpen={isOpen} onClose={onClose} />
       <Box
         w={isMobile ? "95%" : "75%"}
         mx={isMobile ? "1" : "4"}
