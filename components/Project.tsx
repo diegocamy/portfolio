@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import useButtonColor from "../hooks/useButtonColor";
+import useHovering from "../hooks/useHovering";
 
 interface Props {
   inverted?: boolean;
@@ -19,8 +20,8 @@ interface Props {
 function Project({ inverted }: Props) {
   const [isMobile] = useMediaQuery("(max-width: 786px)");
   const { colorMode } = useColorMode();
-  const { buttonColor, buttonTextColor, setHovering } =
-    useButtonColor(colorMode);
+  const { hovering, setHovering } = useHovering();
+  const { buttonColor, buttonTextColor } = useButtonColor(colorMode, hovering);
   const [direction, setDirection] =
     useState<ResponsiveValue<"row" | "column-reverse" | "row-reverse">>("row");
 
@@ -78,6 +79,8 @@ function Project({ inverted }: Props) {
           alt="project_1"
           borderRadius="md"
           objectFit="cover"
+          filter={`grayscale(${hovering ? "0" : "1"})`}
+          transition="all .2s ease-in-out"
         />
       </Box>
     </Flex>

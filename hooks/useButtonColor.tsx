@@ -1,8 +1,7 @@
 import { ColorMode } from "@chakra-ui/color-mode";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-function useButtonColor(colorMode: ColorMode) {
-  const [hovering, setHovering] = useState(false);
+function useButtonColor(colorMode: ColorMode, hovering: boolean) {
   const [buttonColor, setButtonColor] = useState("black");
   const [buttonTextColor, setButtonTextColor] = useState("black");
 
@@ -30,7 +29,7 @@ function useButtonColor(colorMode: ColorMode) {
     }
   }, [colorMode, hovering]);
 
-  return { setHovering, buttonColor, buttonTextColor };
+  return { buttonColor, buttonTextColor };
 }
 
 export default useButtonColor;
