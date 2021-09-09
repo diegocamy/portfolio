@@ -1,11 +1,4 @@
-import {
-  Flex,
-  Heading,
-  Icon,
-  Text,
-  useMediaQuery,
-  ThemingProps,
-} from "@chakra-ui/react";
+import { Flex, Heading, Icon, Text, useMediaQuery } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import {
@@ -25,27 +18,21 @@ import {
 
 function Technologies() {
   const [smallerThan650] = useMediaQuery("(max-width: 650px)");
-  const [smallerThan450] = useMediaQuery("(max-width: 450px)");
   const [dimension, setDimension] = useState("80px");
   const [headingSize, setHeadingSize] = useState<"md" | "lg">("md");
+  const [mx, setMx] = useState(2);
 
   useEffect(() => {
     if (smallerThan650) {
       setHeadingSize("md");
-      return setDimension("45px");
+      setMx(1);
+      return setDimension("40px");
     }
 
     setHeadingSize("lg");
+    setMx(2);
     return setDimension("80px");
   }, [smallerThan650]);
-
-  useEffect(() => {
-    if (smallerThan450) {
-      return setDimension("35px");
-    }
-
-    return setDimension("45px");
-  }, [smallerThan450]);
 
   return (
     <Flex
@@ -59,22 +46,22 @@ function Technologies() {
         Here are some of the technologies I like to work with
       </Heading>
       <Flex my="10">
-        <Icon as={SiReact} h={dimension} w={dimension} mx="2" />
-        <Icon as={SiJavascript} h={dimension} w={dimension} mx="2" />
-        <Icon as={SiNodeDotJs} h={dimension} w={dimension} mx="2" />
-        <Icon as={SiTypescript} h={dimension} w={dimension} mx="2" />
-        <Icon as={SiHtml5} h={dimension} w={dimension} mx="2" />
-        <Icon as={SiCss3} h={dimension} w={dimension} mx="2" />
+        <Icon as={SiReact} h={dimension} w={dimension} mx={mx} />
+        <Icon as={SiJavascript} h={dimension} w={dimension} mx={mx} />
+        <Icon as={SiNodeDotJs} h={dimension} w={dimension} mx={mx} />
+        <Icon as={SiTypescript} h={dimension} w={dimension} mx={mx} />
+        <Icon as={SiHtml5} h={dimension} w={dimension} mx={mx} />
+        <Icon as={SiCss3} h={dimension} w={dimension} mx={mx} />
       </Flex>
       <Flex mb="10">
-        <Icon as={SiGraphql} h={dimension} w={dimension} mx="2" />
-        <Icon as={SiPostgresql} h={dimension} w={dimension} mx="2" />
-        <Icon as={SiSocketDotIo} h={dimension} w={dimension} mx="2" />
-        <Icon as={SiDocker} h={dimension} w={dimension} mx="2" />
-        <Icon as={SiMongodb} h={dimension} w={dimension} mx="2" />
-        <Icon as={SiStyledComponents} h={dimension} w={dimension} mx="2" />
+        <Icon as={SiGraphql} h={dimension} w={dimension} mx={mx} />
+        <Icon as={SiPostgresql} h={dimension} w={dimension} mx={mx} />
+        <Icon as={SiSocketDotIo} h={dimension} w={dimension} mx={mx} />
+        <Icon as={SiDocker} h={dimension} w={dimension} mx={mx} />
+        <Icon as={SiMongodb} h={dimension} w={dimension} mx={mx} />
+        <Icon as={SiStyledComponents} h={dimension} w={dimension} mx={mx} />
       </Flex>
-      <Text>Plus I'm always looking forward to learn new stuff</Text>
+      <Text>Plus I&apos;m always looking forward to learn new stuff</Text>
     </Flex>
   );
 }

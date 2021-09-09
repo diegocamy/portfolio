@@ -9,6 +9,11 @@ function Navbar() {
       m="auto"
       as="header"
       justify="center"
+      position="fixed"
+      top="0"
+      width="100vw"
+      zIndex="2"
+      bgColor={colorMode === "light" ? "white" : "#1A202C"}
       borderBottom={
         colorMode === "light" ? "1px solid #f8f8f8" : "1px solid #283b64"
       }
