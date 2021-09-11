@@ -15,19 +15,20 @@ import {
   ListItem,
   Button,
   DrawerFooter,
-  effect,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useScrollBoost } from "react-scrollbooster";
 import { MdCheckCircle } from "react-icons/md";
+import { ProjectObject } from "../pages";
 
 interface Props {
+  project: ProjectObject;
   isOpen: boolean;
   onClose: () => void;
 }
 
-function ProjectDrawer({ isOpen, onClose }: Props) {
+function ProjectDrawer({ project, isOpen, onClose }: Props) {
   const [viewport] = useScrollBoost({
     direction: "horizontal",
     scrollMode: "transform",
@@ -39,7 +40,7 @@ function ProjectDrawer({ isOpen, onClose }: Props) {
       <DrawerContent maxH="80vh">
         <DrawerCloseButton />
         <DrawerHeader borderBottomWidth="1px">
-          Basic Drawer
+          {project.title}
           <Box>
             <Text fontSize="sm" fontWeight="normal" mb="2">
               Technologies
@@ -63,33 +64,21 @@ function ProjectDrawer({ isOpen, onClose }: Props) {
         <DrawerBody>
           <Flex width="100%" overflow="hidden" ref={viewport}>
             <Flex className="content">
-              <Image
-                alt="screenshot"
-                src="https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png"
-                height="600px"
-                width="1100px"
-                quality="100"
-              />
-              <Image
-                alt="screenshot"
-                src="https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png"
-                layout="fill"
-              />
-              <Image
-                alt="screenshot"
-                src="https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png"
-                layout="fill"
-              />
-              <Image
-                alt="screenshot"
-                src="https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png"
-                layout="fill"
-              />
-              <Image
-                alt="screenshot"
-                src="https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png"
-                layout="fill"
-              />
+              {project.images.map((img, idx) => (
+                <Image
+                  key={idx}
+                  alt={`screenshot ${idx + 1}`}
+                  height="350px"
+                  width="700px"
+                  src={img.src}
+                  blurDataURL={img.blurDataURL}
+                  placeholder="blur"
+                  quality="100"
+                  objectFit="cover"
+                  layout="fixed"
+                  loading="lazy"
+                />
+              ))}
             </Flex>
           </Flex>
           <Box my="5" mb="5" maxW="750px">

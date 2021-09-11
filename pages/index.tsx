@@ -1,9 +1,5 @@
 import { Container } from "@chakra-ui/layout";
-import {
-  GetStaticPathsContext,
-  GetStaticProps,
-  InferGetStaticPropsType,
-} from "next";
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import { getPlaiceholder } from "plaiceholder";
 import React from "react";
@@ -11,7 +7,7 @@ import Hero from "../components/Hero";
 import Projects from "../components/Projects";
 import Technologies from "../components/Technologies";
 
-type Project = {
+export interface ProjectObject {
   images: {
     blurDataURL: string;
     src: string;
@@ -22,10 +18,13 @@ type Project = {
   title: string;
   intro: string;
   text: string;
-};
+}
 
-export default function Home(props) {
-  console.log(props);
+interface Props {
+  projects: ProjectObject[];
+}
+
+export default function Home({ projects }: Props) {
   return (
     <Container maxW="1200px">
       <Head>
@@ -35,7 +34,7 @@ export default function Home(props) {
       </Head>
       <Hero />
       <Technologies />
-      <Projects />
+      <Projects projects={projects} />
     </Container>
   );
 }

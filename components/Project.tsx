@@ -5,21 +5,23 @@ import {
   ResponsiveValue,
   Text,
   useMediaQuery,
-  Image,
   Button,
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import useButtonColor from "../hooks/useButtonColor";
 import useHovering from "../hooks/useHovering";
+import { ProjectObject } from "../pages";
 import ProjectDrawer from "./ProjectDrawer";
 
 interface Props {
+  project: ProjectObject;
   inverted?: boolean;
 }
 
-function Project({ inverted }: Props) {
+function Project({ inverted, project }: Props) {
   const [isMobile] = useMediaQuery("(max-width: 786px)");
   const { onOpen, isOpen, onClose } = useDisclosure();
   const { colorMode } = useColorMode();
@@ -47,9 +49,12 @@ function Project({ inverted }: Props) {
       cursor="pointer"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      onClick={onOpen}
+      onClick={() => {
+        setHovering(false);
+        onOpen();
+      }}
     >
-      <ProjectDrawer isOpen={isOpen} onClose={onClose} />
+      <ProjectDrawer isOpen={isOpen} onClose={onClose} project={project} />
       <Box
         w={isMobile ? "95%" : "75%"}
         mx={isMobile ? "1" : "4"}
@@ -57,13 +62,9 @@ function Project({ inverted }: Props) {
         textAlign={isMobile ? "center" : "left"}
       >
         <Heading as="h3" size="md" mb="2">
-          Project #1
+          {project.title}
         </Heading>
-        <Text>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non dolor
-          beatae totam, veritatis odit ad amet officiis et minima quisquam
-          iusto. Minima est impedit natus, maxime, rem dolor nihil optio
-        </Text>
+        <Text>{project.intro}</Text>
         <Button
           borderRadius="md"
           bg={buttonColor}
@@ -76,16 +77,25 @@ function Project({ inverted }: Props) {
           View
         </Button>
       </Box>
-      <Box mx={isMobile ? "0" : "4"}>
+      <Box
+        mx={isMobile ? "0" : "4"}
+        bgColor="red"
+        w="100%"
+        maxW="380px"
+        h="200px"
+        position="relative"
+        borderRadius="md"
+        filter={`grayscale(${hovering ? "0" : "1"})`}
+        transition="all .2s ease-in-out"
+      >
         <Image
-          src="https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png"
-          width="400px"
-          height="200px"
-          alt="project_1"
-          borderRadius="md"
+          src={project.images[0].src}
+          alt={project.title}
+          blurDataURL={project.images[0].blurDataURL}
+          placeholder="blur"
+          layout="fill"
+          quality="100"
           objectFit="cover"
-          filter={`grayscale(${hovering ? "0" : "1"})`}
-          transition="all .2s ease-in-out"
         />
       </Box>
     </Flex>
