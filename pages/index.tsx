@@ -1,11 +1,31 @@
 import { Container } from "@chakra-ui/layout";
+import {
+  GetStaticPathsContext,
+  GetStaticProps,
+  InferGetStaticPropsType,
+} from "next";
 import Head from "next/head";
+import { getPlaiceholder } from "plaiceholder";
 import React from "react";
 import Hero from "../components/Hero";
 import Projects from "../components/Projects";
 import Technologies from "../components/Technologies";
 
-export default function Home() {
+type Project = {
+  images: {
+    blurDataURL: string;
+    src: string;
+    height: number;
+    width: number;
+    type?: string;
+  }[];
+  title: string;
+  intro: string;
+  text: string;
+};
+
+export default function Home(props) {
+  console.log(props);
   return (
     <Container maxW="1200px">
       <Head>
@@ -19,3 +39,49 @@ export default function Home() {
     </Container>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const projectsData = await Promise.all(
+    data.map(async (project) => {
+      return Promise.all(
+        project.images.map(async (i) => {
+          const { base64, img } = await getPlaiceholder(i);
+
+          return {
+            ...img,
+            blurDataURL: base64,
+          };
+        })
+      ).then((values) => ({ ...project, images: values }));
+    })
+  ).then((values) => values);
+
+  return {
+    props: {
+      projects: projectsData,
+    },
+  };
+};
+
+const data = [
+  {
+    title: "Project 1",
+    intro: "This project is bad",
+    images: [
+      "https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png",
+      "https://miro.medium.com/max/1400/0*e8MtvK1NTBLnXcVR",
+      "https://miro.medium.com/max/700/1*pteOH-KRaRkCvhKT80D88A.png",
+    ],
+    text: "lorem ipsum dolor dolor",
+  },
+  {
+    title: "Project 2",
+    intro: "This project is bad bad",
+    images: [
+      "https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png",
+      "https://miro.medium.com/max/1400/0*e8MtvK1NTBLnXcVR",
+      "https://miro.medium.com/max/700/1*pteOH-KRaRkCvhKT80D88A.png",
+    ],
+    text: "lorem ipsum dolor dolor",
+  },
+];

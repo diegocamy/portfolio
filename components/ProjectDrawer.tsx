@@ -9,15 +9,16 @@ import {
   Flex,
   Text,
   Box,
-  Image,
   Heading,
   List,
   ListIcon,
   ListItem,
   Button,
   DrawerFooter,
+  effect,
 } from "@chakra-ui/react";
-import React from "react";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
 import { useScrollBoost } from "react-scrollbooster";
 import { MdCheckCircle } from "react-icons/md";
 
@@ -63,34 +64,31 @@ function ProjectDrawer({ isOpen, onClose }: Props) {
           <Flex width="100%" overflow="hidden" ref={viewport}>
             <Flex className="content">
               <Image
+                alt="screenshot"
                 src="https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png"
-                mr="2"
-                w="1100px"
-                h="450px"
+                height="600px"
+                width="1100px"
+                quality="100"
               />
               <Image
+                alt="screenshot"
                 src="https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png"
-                mr="2"
-                w="1100px"
-                h="450px"
+                layout="fill"
               />
               <Image
+                alt="screenshot"
                 src="https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png"
-                mr="2"
-                w="1100px"
-                h="450px"
+                layout="fill"
               />
               <Image
+                alt="screenshot"
                 src="https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png"
-                mr="2"
-                w="1100px"
-                h="450px"
+                layout="fill"
               />
               <Image
+                alt="screenshot"
                 src="https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png"
-                mr="2"
-                w="1100px"
-                h="450px"
+                layout="fill"
               />
             </Flex>
           </Flex>
