@@ -6,6 +6,7 @@ import React from "react";
 import Hero from "../components/Hero";
 import Projects from "../components/Projects";
 import Technologies from "../components/Technologies";
+import data from "../data/data";
 
 export interface ProjectObject {
   images: {
@@ -15,9 +16,14 @@ export interface ProjectObject {
     width: number;
     type?: string;
   }[];
+  stack: string[];
   title: string;
   intro: string;
   text: string;
+  features?: string[];
+  details: string;
+  demoURL: string;
+  codeURL: string;
 }
 
 interface Props {
@@ -61,26 +67,3 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   };
 };
-
-const data = [
-  {
-    title: "Project 1",
-    intro: "This project is bad",
-    images: [
-      "https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png",
-      "https://miro.medium.com/max/1400/0*e8MtvK1NTBLnXcVR",
-      "https://miro.medium.com/max/700/1*pteOH-KRaRkCvhKT80D88A.png",
-    ],
-    text: "lorem ipsum dolor dolor",
-  },
-  {
-    title: "Project 2",
-    intro: "This project is bad bad",
-    images: [
-      "https://miro.medium.com/max/2880/1*gGDDAihipvJ1c_tR03h7FA.png",
-      "https://miro.medium.com/max/1400/0*e8MtvK1NTBLnXcVR",
-      "https://miro.medium.com/max/700/1*pteOH-KRaRkCvhKT80D88A.png",
-    ],
-    text: "lorem ipsum dolor dolor",
-  },
-];

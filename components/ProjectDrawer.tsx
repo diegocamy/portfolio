@@ -15,12 +15,14 @@ import {
   ListItem,
   Button,
   DrawerFooter,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
 import { useScrollBoost } from "react-scrollbooster";
 import { MdCheckCircle } from "react-icons/md";
 import { ProjectObject } from "../pages";
+import useHovering from "../hooks/useHovering";
 
 interface Props {
   project: ProjectObject;
@@ -29,6 +31,7 @@ interface Props {
 }
 
 function ProjectDrawer({ project, isOpen, onClose }: Props) {
+  const [isMobile] = useMediaQuery("(max-width: 768px)");
   const [viewport] = useScrollBoost({
     direction: "horizontal",
     scrollMode: "transform",
@@ -37,47 +40,42 @@ function ProjectDrawer({ project, isOpen, onClose }: Props) {
   return (
     <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
-      <DrawerContent maxH="80vh">
+      <DrawerContent maxH={isMobile ? "90vh" : "75vh"}>
         <DrawerCloseButton />
         <DrawerHeader borderBottomWidth="1px">
           {project.title}
           <Box>
-            <Text fontSize="sm" fontWeight="normal" mb="2">
+            <Text fontSize="md" fontWeight="normal" mb="2">
               Technologies
             </Text>
-            <Flex>
-              <Badge variant="outline" mr="2">
-                React
-              </Badge>
-              <Badge variant="outline" mr="2">
-                Typescript
-              </Badge>
-              <Badge variant="outline" mr="2">
-                NodeJs
-              </Badge>
-              <Badge variant="outline" mr="2">
-                Express
-              </Badge>
+            <Flex flexWrap="wrap">
+              {project.stack.map((s, idx) => (
+                <Badge key={idx} variant="outline" mr="2" mb="2">
+                  {s}
+                </Badge>
+              ))}
             </Flex>
           </Box>
         </DrawerHeader>
         <DrawerBody>
           <Flex width="100%" overflow="hidden" ref={viewport}>
-            <Flex className="content">
+            <Flex className="content" align="center">
               {project.images.map((img, idx) => (
-                <Image
-                  key={idx}
-                  alt={`screenshot ${idx + 1}`}
-                  height="350px"
-                  width="700px"
-                  src={img.src}
-                  blurDataURL={img.blurDataURL}
-                  placeholder="blur"
-                  quality="100"
-                  objectFit="cover"
-                  layout="fixed"
-                  loading="lazy"
-                />
+                <Box mr="2" cursor="pointer" key={idx}>
+                  <Image
+                    alt={`screenshot ${idx + 1}`}
+                    height={isMobile ? "180px" : "350px"}
+                    width={isMobile ? "310px" : "700px"}
+                    src={img.src}
+                    blurDataURL={img.blurDataURL}
+                    placeholder="blur"
+                    quality="100"
+                    objectFit="cover"
+                    layout="fixed"
+                    loading="lazy"
+                    className="image"
+                  />
+                </Box>
               ))}
             </Flex>
           </Flex>
@@ -85,48 +83,44 @@ function ProjectDrawer({ project, isOpen, onClose }: Props) {
             <Heading fontSize="md" mb="5">
               Details
             </Heading>
-            <Text>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-              asperiores laborum repellendus expedita cupiditate similique
-              nostrum eveniet, sunt quasi minima recusandae, inventore provident
-              sint hic doloremque quisquam! Inventore, officiis odit? Officiis
-              sint possimus autem officia beatae expedita tempore suscipit.
-              <br />
-              <br />
-              Nostrum explicabo odio dolorem hic, nulla natus distinctio sint
-              sed possimus doloribus? Sit facere ut id maxime rem aut eos
-              aliquam. Laborum voluptatum itaque alias accusantium animi iure,
-              natus voluptatibus amet ut ullam fuga illo, nostrum veniam sed
-              suscipit excepturi? <br />
-              <br />
-              Voluptate, excepturi veniam repellat ipsum unde debitis quaerat
-              dolor qui nemo?
-            </Text>
+            {project.details.split("nline").map((line) => (
+              <Text mb="5" key={line}>
+                {line}
+              </Text>
+            ))}
           </Box>
-          <Box my="5">
-            <Heading fontSize="md" mb="5">
-              Features
-            </Heading>
-            <List spacing={1}>
-              <ListItem>
-                <ListIcon as={MdCheckCircle} />
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit
-              </ListItem>
-              <ListItem>
-                <ListIcon as={MdCheckCircle} />
-                Assumenda, quia temporibus eveniet a libero incidunt suscipit
-              </ListItem>
-              <ListItem>
-                <ListIcon as={MdCheckCircle} />
-                Quidem, ipsam illum quis sed voluptatum quae eum fugit earum
-              </ListItem>
-            </List>
-          </Box>
+          {project.features && (
+            <Box my="5">
+              <Heading fontSize="md" mb="5">
+                Features
+              </Heading>
+              <List spacing={1}>
+                {project.features.map((f) => (
+                  <ListItem key={f}>
+                    <ListIcon as={MdCheckCircle} />
+                    {f}
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+          )}
+
           <DrawerFooter borderTopWidth="1px" justifyContent="flex-start">
-            <Button variant="outline" colorScheme="black" mr={3}>
+            <Button
+              variant="outline"
+              colorScheme="black"
+              mr={3}
+              cursor="pointer"
+              onClick={() => window.open(project.demoURL, "_blank")}
+            >
               Demo
             </Button>
-            <Button variant="outline" colorScheme="black">
+            <Button
+              variant="outline"
+              colorScheme="black"
+              cursor="pointer"
+              onClick={() => window.open(project.codeURL, "_blank")}
+            >
               View Code
             </Button>
           </DrawerFooter>
