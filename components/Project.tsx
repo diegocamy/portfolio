@@ -96,6 +96,7 @@ function Project({ inverted, project }: Props) {
           layout="fill"
           quality="100"
           objectFit="cover"
+          className="image"
         />
       </Box>
     </Flex>
