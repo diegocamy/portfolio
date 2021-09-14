@@ -72,6 +72,27 @@ const data = [
     demoURL: "https://quebode.herokuapp.com",
     codeURL: "https://github.com/diegocamy/quebode",
   },
+  {
+    title: "SA-Radios",
+    intro: "Listen to the Gran Theft Auto: San Andreas radiostations anywhere",
+    images: [
+      "https://res.cloudinary.com/diegocamy/image/upload/v1631551630/portfolio/sa-radios/SA-Radios_yvzh0u.png",
+      "https://res.cloudinary.com/diegocamy/image/upload/v1631551631/portfolio/sa-radios/SA-Radios1_mxvixn.png",
+      "https://res.cloudinary.com/diegocamy/image/upload/v1631551631/portfolio/sa-radios/SA-Radios2_hlheib.png",
+      "https://res.cloudinary.com/diegocamy/image/upload/v1631551631/portfolio/sa-radios/SA-Radios4_bw9rur.png",
+      "https://res.cloudinary.com/diegocamy/image/upload/v1631551631/portfolio/sa-radios/SA-Radios5_nx3z22.png",
+    ],
+    details:
+      "This is probably my favourite project. It was really challenging to recreate the experience of listening to the radio stations in the game. nline This was my first time using Typescript with React and was without a doubt a turning point for me, I can no longer see myself not using Typescript. nline In addition you can identify the music playing from the radio stations using Shazam inside the app. nline",
+    stack: ["React", "Typescript", "Node.js", "Express"],
+    features: [
+      "In game radio experience",
+      "Music recognition provided by Shazam",
+      "Responsive design",
+    ],
+    demoURL: "https://sa-radios.herokuapp.com",
+    codeURL: "https://github.com/diegocamy/sa-radios",
+  },
 ];
 
 export default data;
