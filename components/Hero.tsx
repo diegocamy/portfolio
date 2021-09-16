@@ -35,6 +35,7 @@ function Hero() {
       direction={direction}
       justify="center"
       align="center"
+      id="about"
     >
       <Box mx="2">
         <Image

@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Flex, Heading, Icon, Text, useColorMode } from "@chakra-ui/react";
-import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { Flex, Heading, Text, useColorMode } from "@chakra-ui/react";
+import { scrollIntoView } from "../utils/scrollIntoView";
 
 function Navbar() {
   const { colorMode } = useColorMode();
@@ -25,39 +25,42 @@ function Navbar() {
           flexGrow={1}
           m="auto"
           mx="4"
+          onClick={() => {
+            scrollTo({ top: 0, behavior: "smooth" });
+          }}
         >
-          <Link href="/">Diego Camy</Link>
+          Diego Camy
         </Heading>
         <Flex mr="2" align="center">
-          <Text mx="1" cursor="pointer">
-            About Me
+          <Text
+            mx="1"
+            cursor="pointer"
+            onClick={() => {
+              scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            About
           </Text>
-          <Text mx="1" cursor="pointer">
+          <Text
+            mx="1"
+            cursor="pointer"
+            onClick={() => {
+              scrollIntoView("projects");
+            }}
+          >
             Projects
           </Text>
-          <Text mx="1" cursor="pointer">
+          <Text
+            mx="1"
+            cursor="pointer"
+            onClick={() => {
+              document
+                .querySelector("#contact")
+                .scrollIntoView({ behavior: "smooth" });
+            }}
+          >
             Contact
           </Text>
-          <Icon
-            as={FaLinkedin}
-            mx="1"
-            w="7"
-            h="7"
-            cursor="pointer"
-            onClick={() =>
-              window.open("https://linkedin.com/in/diegocamy", "_blank")
-            }
-          />
-          <Icon
-            as={FaGithub}
-            mx="1"
-            w="7"
-            h="7"
-            cursor="pointer"
-            onClick={() =>
-              window.open("https://github.com/diegocamy", "_blank")
-            }
-          />
         </Flex>
       </Flex>
     </Flex>
