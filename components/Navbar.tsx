@@ -23,6 +23,7 @@ function Navbar() {
           fontSize="lg"
           fontWeight="extrabold"
           flexGrow={1}
+          cursor="pointer"
           m="auto"
           mx="4"
           onClick={() => {

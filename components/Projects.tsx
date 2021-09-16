@@ -29,7 +29,8 @@ function Projects({ projects }: Props) {
       align="center"
       id="projects"
       as="section"
-      my="20"
+      mt="20"
+      mb="10"
     >
       <Heading as="h3" size="lg" mb="10">
         My Projects
