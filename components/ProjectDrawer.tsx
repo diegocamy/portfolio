@@ -16,6 +16,7 @@ import {
   Button,
   DrawerFooter,
   useMediaQuery,
+  useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
@@ -23,6 +24,7 @@ import { useScrollBoost } from "react-scrollbooster";
 import { MdCheckCircle } from "react-icons/md";
 import { ProjectObject } from "../pages";
 import useHovering from "../hooks/useHovering";
+import FullScreenImage from "./FullScreenImage";
 
 interface Props {
   project: ProjectObject;
@@ -31,6 +33,7 @@ interface Props {
 }
 
 function ProjectDrawer({ project, isOpen, onClose }: Props) {
+  const { onOpen, onClose: onclose, isOpen: isopen } = useDisclosure();
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const [viewport] = useScrollBoost({
     direction: "horizontal",
@@ -58,6 +61,7 @@ function ProjectDrawer({ project, isOpen, onClose }: Props) {
           </Box>
         </DrawerHeader>
         <DrawerBody>
+          <FullScreenImage isOpen={isopen} onClose={onclose} />
           <Flex width="100%" overflow="hidden" ref={viewport}>
             <Flex className="content" align="center">
               {project.images.map((img, idx) => (
@@ -67,6 +71,7 @@ function ProjectDrawer({ project, isOpen, onClose }: Props) {
                     height={isMobile ? "180px" : "350px"}
                     width={isMobile ? "310px" : "700px"}
                     src={img.src}
+                    onClick={onOpen}
                     blurDataURL={img.blurDataURL}
                     placeholder="blur"
                     quality="100"
