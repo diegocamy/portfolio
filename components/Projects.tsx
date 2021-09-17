@@ -1,26 +1,26 @@
-import {
-  Button,
-  Flex,
-  Heading,
-  IconButton,
-  Link,
-  useColorMode,
-} from "@chakra-ui/react";
-import React from "react";
-import { FaGit, FaGithub } from "react-icons/fa";
+import { Button, Flex, Heading, useColorMode } from "@chakra-ui/react";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
+import { FaGithub } from "react-icons/fa";
 import useButtonColor from "../hooks/useButtonColor";
 import useHovering from "../hooks/useHovering";
 import { ProjectObject } from "../pages";
 import Project from "./Project";
+import { useInView } from "react-intersection-observer";
 
 interface Props {
   projects: ProjectObject[];
+  setVisibleSection: Dispatch<SetStateAction<"about" | "projects" | "contact">>;
 }
 
-function Projects({ projects }: Props) {
+function Projects({ projects, setVisibleSection }: Props) {
   const { colorMode } = useColorMode();
   const { hovering, setHovering } = useHovering();
   const { buttonColor, buttonTextColor } = useButtonColor(colorMode, hovering);
+  const { ref, inView } = useInView({ threshold: 0.4 });
+
+  useEffect(() => {
+    setVisibleSection("projects");
+  }, [inView]);
 
   return (
     <Flex
@@ -30,7 +30,7 @@ function Projects({ projects }: Props) {
       id="projects"
       as="section"
       mt="20"
-      mb="10"
+      ref={ref}
     >
       <Heading as="h3" size="lg" mb="10">
         My Projects
@@ -43,7 +43,6 @@ function Projects({ projects }: Props) {
       </Heading>
       <Button
         leftIcon={<FaGithub />}
-        mb="10"
         fontSize="xl"
         as="a"
         href="https://github.com/diegocamy"

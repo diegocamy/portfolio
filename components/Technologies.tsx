@@ -40,7 +40,7 @@ function Technologies() {
       direction="column"
       justify="center"
       align="center"
-      my="20"
+      my="15"
     >
       <Heading as="h3" size={headingSize} textAlign="center">
         Here are some of the technologies I like to work with

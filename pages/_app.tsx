@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import ThemeSwitch from "../components/ThemeSwitch";
 import "@fontsource/karla";
 import "@fontsource/rubik";
+import Footer from "../components/Footer";
+import { useState } from "react";
 
 const theme = extendTheme({
   fonts: {
@@ -14,11 +16,16 @@ const theme = extendTheme({
 });
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [visibleSection, setVisibleSection] = useState<
+    "about" | "projects" | "contact"
+  >("about");
+
   return (
     <ChakraProvider theme={theme}>
-      <Navbar />
-      <Component {...pageProps} />
+      <Navbar visibleSection={visibleSection} />
+      <Component {...pageProps} setVisibleSection={setVisibleSection} />
       <ThemeSwitch />
+      <Footer />
     </ChakraProvider>
   );
 }

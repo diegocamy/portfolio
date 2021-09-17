@@ -1,9 +1,13 @@
-import Link from "next/link";
 import { Flex, Heading, Text, useColorMode } from "@chakra-ui/react";
 import { scrollIntoView } from "../utils/scrollIntoView";
 
-function Navbar() {
+interface Props {
+  visibleSection: "about" | "projects" | "contact";
+}
+
+function Navbar({ visibleSection }: Props) {
   const { colorMode } = useColorMode();
+
   return (
     <Flex
       m="auto"
@@ -20,7 +24,7 @@ function Navbar() {
     >
       <Flex maxW="1200px" w="100%" py="2" justify="center">
         <Heading
-          fontSize="lg"
+          fontSize="2xl"
           fontWeight="extrabold"
           flexGrow={1}
           cursor="pointer"
@@ -35,6 +39,7 @@ function Navbar() {
         <Flex mr="2" align="center">
           <Text
             mx="1"
+            fontWeight={visibleSection === "about" ? "bold" : "normal"}
             cursor="pointer"
             onClick={() => {
               scrollTo({ top: 0, behavior: "smooth" });
@@ -44,6 +49,7 @@ function Navbar() {
           </Text>
           <Text
             mx="1"
+            fontWeight={visibleSection === "projects" ? "bold" : "normal"}
             cursor="pointer"
             onClick={() => {
               scrollIntoView("projects");
@@ -53,6 +59,7 @@ function Navbar() {
           </Text>
           <Text
             mx="1"
+            fontWeight={visibleSection === "contact" ? "bold" : "normal"}
             cursor="pointer"
             onClick={() => {
               document

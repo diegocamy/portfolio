@@ -7,15 +7,21 @@ import {
   ResponsiveValue,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import me from "../public/me.png";
+import { scrollIntoView } from "../utils/scrollIntoView";
 
-function Hero() {
+interface Props {
+  setVisibleSection: Dispatch<SetStateAction<"about" | "projects" | "contact">>;
+}
+
+function Hero({ setVisibleSection }: Props) {
   const [isMobile] = useMediaQuery("(max-width: 786px)");
   const [number, setNumber] = useState(undefined);
   const [direction, setDirection] =
     useState<ResponsiveValue<"row" | "column">>("row");
+  const { ref, inView } = useInView();
 
   useEffect(() => {
     setNumber(Math.ceil(Math.random() * 10000));
@@ -27,15 +33,20 @@ function Hero() {
     return setDirection("row");
   }, [isMobile]);
 
+  useEffect(() => {
+    if (inView) return setVisibleSection("about");
+  }, [inView]);
+
   return (
     <Flex
       as="section"
       mx="auto"
-      my="20"
+      my="40"
       direction={direction}
       justify="center"
       align="center"
       id="about"
+      ref={ref}
     >
       <Box mx="2">
         <Image
@@ -62,7 +73,16 @@ function Hero() {
           </Text>
           {", "}
           <Text as="span" color="linkedin.600">
-            <Link href="#projects">click here!</Link>{" "}
+            <Text
+              as="span"
+              fontWeight="bold"
+              cursor="pointer"
+              onClick={() => {
+                scrollIntoView("projects");
+              }}
+            >
+              click here!
+            </Text>{" "}
           </Text>
           Or you can scroll, which is slower and boring.{" "}
         </Text>

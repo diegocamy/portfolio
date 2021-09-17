@@ -1,11 +1,10 @@
 export const scrollIntoView = (elementID: string) => {
-  var element = document.getElementById(elementID);
-  var headerOffset = 50;
-  var elementPosition = element.getBoundingClientRect().top;
-  var offsetPosition = elementPosition - headerOffset;
+  const yOffset = -50;
+  const element = document.getElementById(elementID);
+  const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
   window.scrollTo({
-    top: offsetPosition,
+    top: y,
     behavior: "smooth",
   });
 };
