@@ -29,7 +29,7 @@ function Projects({ projects, setVisibleSection }: Props) {
       align="center"
       id="projects"
       as="section"
-      mt="20"
+      my="40"
       ref={ref}
     >
       <Heading as="h3" size="lg" mb="10">
