@@ -20,7 +20,7 @@ function Contact({ setVisibleSection }: Props) {
   return (
     <Flex direction="column" align="center" my="40" id="contact" ref={ref}>
       <Heading my="10" fontSize={isMobile ? "4xl" : "7xl"}>
-        Let's get in touch!
+        Let&apos;s get in touch!
       </Heading>
       <Flex
         wrap="wrap"
