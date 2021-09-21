@@ -38,7 +38,7 @@ function ProjectDrawer({ project, isOpen, onClose }: Props) {
   return (
     <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
-      <DrawerContent maxH={isMobile ? "90vh" : "75vh"}>
+      <DrawerContent maxH={"75vh"}>
         <DrawerCloseButton />
         <DrawerHeader borderBottomWidth="1px">
           {project.title}
