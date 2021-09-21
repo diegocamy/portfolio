@@ -19,11 +19,10 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useScrollBoost } from "react-scrollbooster";
 import { MdCheckCircle } from "react-icons/md";
 import { ProjectObject } from "../pages";
-import useHovering from "../hooks/useHovering";
 import FullScreenImage from "./FullScreenImage";
 
 interface Props {

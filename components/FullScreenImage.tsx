@@ -6,7 +6,6 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalFooter,
-  Box,
 } from "@chakra-ui/react";
 import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
