@@ -35,7 +35,7 @@ function Hero({ setVisibleSection }: Props) {
 
   useEffect(() => {
     if (inView) return setVisibleSection("about");
-  }, [inView]);
+  }, [inView, setVisibleSection]);
 
   return (
     <Flex

@@ -20,7 +20,7 @@ function Projects({ projects, setVisibleSection }: Props) {
 
   useEffect(() => {
     setVisibleSection("projects");
-  }, [inView]);
+  }, [inView, setVisibleSection]);
 
   return (
     <Flex

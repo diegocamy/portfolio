@@ -15,7 +15,7 @@ function Contact({ setVisibleSection }: Props) {
 
   useEffect(() => {
     setVisibleSection("contact");
-  }, [inView]);
+  }, [inView, setVisibleSection]);
 
   return (
     <Flex direction="column" align="center" my="40" id="contact" ref={ref}>
