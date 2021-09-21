@@ -1,4 +1,10 @@
-import { Button, Flex, Heading, useColorMode } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  Heading,
+  useColorMode,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { FaGithub } from "react-icons/fa";
 import useButtonColor from "../hooks/useButtonColor";
@@ -13,10 +19,11 @@ interface Props {
 }
 
 function Projects({ projects, setVisibleSection }: Props) {
+  const [isMobile] = useMediaQuery("(max-width: 786px)");
   const { colorMode } = useColorMode();
   const { hovering, setHovering } = useHovering();
   const { buttonColor, buttonTextColor } = useButtonColor(colorMode, hovering);
-  const { ref, inView } = useInView({ threshold: 0.4 });
+  const { ref, inView } = useInView({ threshold: isMobile ? 0.2 : 0.4 });
 
   useEffect(() => {
     setVisibleSection("projects");

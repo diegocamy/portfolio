@@ -90,7 +90,6 @@ function Project({ inverted, project }: Props) {
       </Box>
       <Box
         mx={boxMargin}
-        bgColor="red"
         w="100%"
         maxW="380px"
         h="200px"
