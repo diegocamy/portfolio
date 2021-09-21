@@ -16,14 +16,11 @@ import {
   Button,
   DrawerFooter,
   useMediaQuery,
-  useDisclosure,
 } from "@chakra-ui/react";
-import Image from "next/image";
-import React, { useState } from "react";
 import { useScrollBoost } from "react-scrollbooster";
 import { MdCheckCircle } from "react-icons/md";
 import { ProjectObject } from "../pages";
-import FullScreenImage from "./FullScreenImage";
+import ImageWithZoom from "./ImageWithZoom";
 
 interface Props {
   project: ProjectObject;
@@ -32,13 +29,11 @@ interface Props {
 }
 
 function ProjectDrawer({ project, isOpen, onClose }: Props) {
-  const { onOpen, onClose: onclose, isOpen: isopen } = useDisclosure();
   const [isMobile] = useMediaQuery("(max-width: 768px)");
   const [viewport] = useScrollBoost({
     direction: "horizontal",
     scrollMode: "transform",
   });
-  const [currIdx, setCurrIdx] = useState(0);
 
   return (
     <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
@@ -61,35 +56,15 @@ function ProjectDrawer({ project, isOpen, onClose }: Props) {
           </Box>
         </DrawerHeader>
         <DrawerBody>
-          <FullScreenImage
-            isOpen={isopen}
-            onClose={onclose}
-            images={project.images}
-            currIdx={currIdx}
-            setCurrIdx={setCurrIdx}
-          />
           <Flex width="100%" overflow="hidden" ref={viewport}>
             <Flex className="content" align="center">
               {project.images.map((img, idx) => (
-                <Box mr="2" cursor="pointer" key={idx}>
-                  <Image
-                    alt={`screenshot ${idx + 1}`}
-                    height={isMobile ? "180px" : "350px"}
-                    width={isMobile ? "310px" : "700px"}
-                    src={img.src}
-                    onClick={() => {
-                      setCurrIdx(idx);
-                      onOpen();
-                    }}
-                    blurDataURL={img.blurDataURL}
-                    placeholder="blur"
-                    quality="100"
-                    objectFit="cover"
-                    layout="fixed"
-                    loading="lazy"
-                    className="image"
-                  />
-                </Box>
+                <ImageWithZoom
+                  isMobile={isMobile}
+                  key={idx}
+                  blurDataURL={img.blurDataURL}
+                  imageSrc={img.src}
+                />
               ))}
             </Flex>
           </Flex>
