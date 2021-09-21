@@ -9,9 +9,11 @@ function ThemeSwitch() {
   useEffect(() => {
     const color = localStorage.getItem("chakra-ui-color-mode");
 
-    if (color === "light") return setIsDark(false);
+    if (color) {
+      return color === "light" ? setIsDark(false) : setIsDark(true);
+    }
 
-    return setIsDark(true);
+    return setIsDark(false);
   }, []);
 
   return (

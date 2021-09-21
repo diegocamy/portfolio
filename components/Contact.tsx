@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/button";
 import { Flex, Heading, Text } from "@chakra-ui/layout";
 import { useMediaQuery } from "@chakra-ui/media-query";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { FaEnvelope, FaLinkedin } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
 
@@ -12,26 +12,37 @@ interface Props {
 function Contact({ setVisibleSection }: Props) {
   const [isMobile] = useMediaQuery("(max-width: 786px)");
   const { ref, inView } = useInView({ threshold: 0.4 });
+  const [fontSize, setFontSize] = useState("7xl");
+  const [direction, setDirection] = useState<"row" | "column">("row");
+  const [margin, setMargin] = useState("5");
 
   useEffect(() => {
     setVisibleSection("contact");
   }, [inView, setVisibleSection]);
 
+  useEffect(() => {
+    if (isMobile) {
+      setFontSize("4xl");
+      setDirection("column");
+      setMargin("2");
+      return;
+    }
+
+    setFontSize("7xl");
+    setDirection("row");
+    setMargin("5");
+  }, [isMobile]);
+
   return (
     <Flex direction="column" align="center" my="40" id="contact" ref={ref}>
-      <Heading my="10" fontSize={isMobile ? "4xl" : "7xl"}>
+      <Heading my="10" fontSize={fontSize}>
         Let&apos;s get in touch!
       </Heading>
-      <Flex
-        wrap="wrap"
-        justify="center"
-        align="center"
-        direction={isMobile ? "column" : "row"}
-      >
+      <Flex wrap="wrap" justify="center" align="center" direction={direction}>
         <Button
           leftIcon={<FaEnvelope />}
           fontSize="2xl"
-          m={isMobile ? "2" : "5"}
+          m={margin}
           size="lg"
           as="a"
           href="mailto:diegocamyy@gmail.com"
@@ -45,7 +56,7 @@ function Contact({ setVisibleSection }: Props) {
         <Button
           leftIcon={<FaLinkedin />}
           fontSize="2xl"
-          m={isMobile ? "2" : "5"}
+          m={margin}
           size="lg"
           as="a"
           href="https://linkedin.com/in/diegocamy"

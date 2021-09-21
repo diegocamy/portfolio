@@ -29,6 +29,9 @@ function Project({ inverted, project }: Props) {
   const { buttonColor, buttonTextColor } = useButtonColor(colorMode, hovering);
   const [direction, setDirection] =
     useState<ResponsiveValue<"row" | "column-reverse" | "row-reverse">>("row");
+  const [textAlign, setTextAlign] = useState<"center" | "left">("left");
+  const [width, setWidth] = useState("75%");
+  const [boxMargin, setBoxMargin] = useState("1");
 
   useEffect(() => {
     if (isMobile) return setDirection("column-reverse");
@@ -37,6 +40,19 @@ function Project({ inverted, project }: Props) {
 
     return setDirection("row");
   }, [isMobile, inverted]);
+
+  useEffect(() => {
+    if (isMobile) {
+      setWidth("95%");
+      setTextAlign("center");
+      setBoxMargin("1");
+      return;
+    }
+
+    setTextAlign("left");
+    setWidth("75%");
+    setBoxMargin("4");
+  }, [isMobile]);
 
   return (
     <Flex
@@ -55,12 +71,7 @@ function Project({ inverted, project }: Props) {
       }}
     >
       <ProjectDrawer isOpen={isOpen} onClose={onClose} project={project} />
-      <Box
-        w={isMobile ? "95%" : "75%"}
-        mx={isMobile ? "1" : "4"}
-        my="5"
-        textAlign={isMobile ? "center" : "left"}
-      >
+      <Box w={width} mx={boxMargin} my="5" textAlign={textAlign}>
         <Heading as="h3" size="md" mb="2">
           {project.title}
         </Heading>
@@ -78,7 +89,7 @@ function Project({ inverted, project }: Props) {
         </Button>
       </Box>
       <Box
-        mx={isMobile ? "0" : "4"}
+        mx={boxMargin}
         bgColor="red"
         w="100%"
         maxW="380px"
