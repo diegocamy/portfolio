@@ -19,7 +19,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useScrollBoost } from "react-scrollbooster";
 import { MdCheckCircle } from "react-icons/md";
 import { ProjectObject } from "../pages";
@@ -39,6 +39,7 @@ function ProjectDrawer({ project, isOpen, onClose }: Props) {
     direction: "horizontal",
     scrollMode: "transform",
   });
+  const [currIdx, setCurrIdx] = useState(0);
 
   return (
     <Drawer placement="bottom" onClose={onClose} isOpen={isOpen}>
@@ -61,7 +62,13 @@ function ProjectDrawer({ project, isOpen, onClose }: Props) {
           </Box>
         </DrawerHeader>
         <DrawerBody>
-          <FullScreenImage isOpen={isopen} onClose={onclose} />
+          <FullScreenImage
+            isOpen={isopen}
+            onClose={onclose}
+            images={project.images}
+            currIdx={currIdx}
+            setCurrIdx={setCurrIdx}
+          />
           <Flex width="100%" overflow="hidden" ref={viewport}>
             <Flex className="content" align="center">
               {project.images.map((img, idx) => (
@@ -71,7 +78,10 @@ function ProjectDrawer({ project, isOpen, onClose }: Props) {
                     height={isMobile ? "180px" : "350px"}
                     width={isMobile ? "310px" : "700px"}
                     src={img.src}
-                    onClick={onOpen}
+                    onClick={() => {
+                      setCurrIdx(idx);
+                      onOpen();
+                    }}
                     blurDataURL={img.blurDataURL}
                     placeholder="blur"
                     quality="100"
