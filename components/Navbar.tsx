@@ -36,7 +36,7 @@ function Navbar({ visibleSection }: Props) {
         >
           Diego Camy
         </Heading>
-        <Flex mr="2" align="center">
+        <Flex mr="2" align="center" fontSize="lg">
           <Text
             mx="1"
             fontWeight={visibleSection === "about" ? "bold" : "normal"}
